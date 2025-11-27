@@ -1,4 +1,4 @@
 module.exports = global.config = {
-    host: "/api"
+    host: "/"
     //host: "https://kiberonetgbot.online"
 };
