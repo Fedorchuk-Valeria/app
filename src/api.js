@@ -2,7 +2,7 @@ import './config'
 import axios from 'axios'
 
 export async function LoginTutor(numberPhone) {
-    const url = `${global.config.host}/api/v1/tutors/login/`
+    const url = `${global.config.host}/tutors/login/`
     const data = {
         "phone_number": numberPhone
     }
@@ -18,7 +18,7 @@ export async function LoginTutor(numberPhone) {
 }
 
 export async function RegisterTutor(numberPhone, branch) {
-    const url = `${global.config.host}/api/v1/tutors/register/`
+    const url = `${global.config.host}/tutors/register/`
     const data = {
         "phone_number": numberPhone,
         "tutor_branch_id": branch
@@ -35,7 +35,7 @@ export async function RegisterTutor(numberPhone, branch) {
 }
 
 export async function CheckSeniorRole(token){
-    const url = `${global.config.host}/api/v1/tutors/detail/`
+    const url = `${global.config.host}/tutors/detail/`
     const headers = {
         'accept': 'application/json',
         'Authorization': "Bearer " + token
@@ -50,7 +50,7 @@ export async function CheckSeniorRole(token){
 
 
 export async function GetGroups(token){
-    const url = `${global.config.host}/api/v1/tutors/groups/`
+    const url = `${global.config.host}/tutors/groups/`
     const headers = {
         'accept': 'application/json',
         'Authorization': "Bearer " + token
@@ -64,7 +64,7 @@ export async function GetGroups(token){
 }
 
 export async function GetGroupsClients(groupId, token) {
-    const url = `${global.config.host}/api/v1/groups/clients/?group_id=${groupId}`
+    const url = `${global.config.host}/groups/clients/?group_id=${groupId}`
     const headers = {
         'accept': 'application/json',
         'Authorization': "Bearer " + token
@@ -78,7 +78,7 @@ export async function GetGroupsClients(groupId, token) {
 }
 
 export async function GetNotApproveResumes(token){
-    const url = `${global.config.host}/api/v1/resumes/unverified/`
+    const url = `${global.config.host}/resumes/unverified/`
     const headers = {
         'Accept': 'application/json',
         'Authorization': "Bearer " + token
@@ -101,7 +101,7 @@ export function CheckNotAproveResumes(resumes, client_id) {
 }
 
 export async function GetClientResumes(client_id, token) {
-    const url = `${global.config.host}/api/v1/resumes/client/?student_crm_id=${client_id}`
+    const url = `${global.config.host}/resumes/client/?student_crm_id=${client_id}`
     const headers = {
         'accept': 'application/json',
         'Authorization': "Bearer " + token
@@ -115,7 +115,7 @@ export async function GetClientResumes(client_id, token) {
 }
 
 export async function EditClientResume(resume_id, newText, token) {
-    const url = `${global.config.host}/api/v1/resumes/${resume_id}/`
+    const url = `${global.config.host}/resumes/${resume_id}/`
     const data = {
         "content": newText
     }
@@ -132,7 +132,7 @@ export async function EditClientResume(resume_id, newText, token) {
 }
 
 export async function AddResume(client_id, resumeText, token) {
-    const url = `${global.config.host}/api/v1/resumes/`
+    const url = `${global.config.host}/resumes/`
     const data = {
         "student_crm_id": client_id,
         "content": resumeText
@@ -150,7 +150,7 @@ export async function AddResume(client_id, resumeText, token) {
 }
 
 export async function GetReviews(client_id, token) {
-    const url = `${global.config.host}/api/v1/reviews/${client_id}/`
+    const url = `${global.config.host}/reviews/${client_id}/`
     const headers = {
         'Content-Type': 'application/json',
         'Authorization': "Bearer " + token
@@ -184,7 +184,7 @@ export async function FilderByStartDate(clients, token, startDateBorder, endDate
     let filter_clients = []
     for (let index = 0; index < clients.length; index++) {
         let id = clients[index].customer_id
-        let url = `${global.config.host}/api/v1/clients/detail/?student_crm_id=${id}`
+        let url = `${global.config.host}/clients/detail/?student_crm_id=${id}`
         let res = await axios.get(url, { headers: headers })
         let clientStartDateArr = res.data.custom_datano.split(".")
         let clientStartDate = new Date(clientStartDateArr[1] + "." + clientStartDateArr[0] + "." + clientStartDateArr[2])
@@ -201,7 +201,7 @@ export async function FilderByStartDate(clients, token, startDateBorder, endDate
 
 
 export async function VerifyResume(resume_id, token) {
-    const url = `${global.config.host}/api/v1/resumes/${resume_id}/verify/`
+    const url = `${global.config.host}/resumes/${resume_id}/verify/`
     const headers = {
         'accept': 'application/json',
         'Authorization': "Bearer " + token
@@ -216,7 +216,7 @@ export async function VerifyResume(resume_id, token) {
 }
 
 export async function DeleteResume(resume_id, token) {
-    const url = `${global.config.host}/api/v1/resumes/${resume_id}/`
+    const url = `${global.config.host}/resumes/${resume_id}/`
     const headers = {
         'accept': 'application/json',
         'Authorization': "Bearer " + token
