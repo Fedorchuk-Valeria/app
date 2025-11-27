@@ -1,0 +1,285 @@
+#reviewsPage {
+    background-color: white;
+    min-height: 100vh;
+    height: fit-content;
+}
+
+#reviewsPageHeader {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#reviewsPageHeader p {
+    font-size: 18px;
+}
+
+@media (max-width: 1050px) {
+    #reviewsPageHeader p {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 850px) {
+    #reviewsPageHeader p {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 550px) {
+    #reviewsPageHeader p {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    #reviewsPageHeader p {
+        font-size: 22px;
+    }
+}
+
+.withBg {
+    background-color: #F6C90E;
+    border-radius: 50px;
+    padding: 5px;
+    color: white;
+}
+
+.reviewField {
+    width: 40vw;
+    background-color: #9C9C9C;
+    padding: 15px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    margin-bottom: 35px;
+    font-size: 18px;
+}
+
+@media (max-width: 1050px) {
+    .reviewField {
+        width: 80vw;
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 850px) {
+    .reviewField {
+        width: 80vw;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 550px) {
+    .reviewField {
+        width: 80vw;
+    }
+}
+
+@media (max-width: 450px) {
+    .reviewField {
+        width: 80vw;
+    }
+}
+
+.reviewHeader {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.reviewBody {
+    display: flex;
+    flex-direction: row;
+}
+
+.reviewActions {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewActionButton {
+    border: none;
+    background: none;
+    margin-left: 5px;
+}
+
+.reviewActionButton img{
+    width: 25px;
+}
+
+#reviewMain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#editreview {
+    display: none;
+    position: absolute;
+    margin-top: 10%;
+    width: 500px;
+    height: 300px;
+    background: #1D576F;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (max-width: 1050px) {
+    #editreview {
+        margin-top: 25%;
+        width: 700px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 850px) {
+    #editreview {
+        margin-top: 30%;
+        width: 500px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 550px) {
+    #editreview {
+        margin-top: 40%;
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 450px) {
+    #editreview {
+        margin-top: 40%;
+        width: 300px;
+        height: 350px;
+    }
+}
+
+#editreview button {
+    width: 30%;
+    height: 10%;
+    background-color: white;
+    border: none;
+    font-size: 18px;
+    font-family: 'pf_beausans_prolight';
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+@media (max-width: 1050px) {
+    #editreview button {
+        width: 25%;
+        height: 10%;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 850px) {
+    #editreview button {
+        width: 26%;
+        height: 10%;
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 550px) {
+    #editreview button {
+        width: 30%;
+        height: 8%;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    #editreview button {
+        width: 40%;
+        height: 8%;
+        font-size: 18px;
+    }
+}
+
+#editreview textarea {
+    width: 90%;
+    height: 60%;
+    margin-top: 5%;
+    padding: 5px;
+    border-radius: 10px;
+    font-family: 'pf_beausans_prolight';
+    font-size: 16px;
+}
+
+@media (max-width: 1050px) {
+    #editreview textarea {
+        width: 90%;
+        height: 70%;
+        margin-top: 3%;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 850px) {
+    #editreview textarea {
+        width: 90%;
+        height: 70%;
+        margin-top: 3%;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 550px) {
+    #editreview textarea {
+        width: 90%;
+        height: 70%;
+        margin-top: 3%;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 450px) {
+    #editreview textarea {
+        width: 90%;
+        height: 70%;
+        margin-top: 2%;
+        font-size: 17px;
+    }
+}
+
+#reviewsPageHeader button {
+    background-color: #1D576F;
+    border-radius: 50px;
+    padding: 5px;
+    color: white;
+    font-size: 16px;
+    font-family: 'pf_beausans_prolight';
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+}
+
+@media (max-width: 1050px) {
+    #reviewsPageHeader button {
+        font-size: 26px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (max-width: 850px) {
+    #reviewsPageHeader button {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 550px) {
+    #reviewsPageHeader button {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    #reviewsPageHeader button {
+        font-size: 20px;
+    }
+}

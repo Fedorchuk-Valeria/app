@@ -1,0 +1,259 @@
+body {
+  background: #06B9BE;
+  /* height: 100vh; */
+  /* padding-top: 10%; */
+  /* box-sizing: border-box; */
+  margin: 0;
+}
+
+.logoImg {
+    width: 150px;
+}
+
+@media (max-width: 1050px) {
+    .logoImg {
+        width: 300px;
+    }
+}
+
+@media (max-width: 850px) {
+    .logoImg {
+        width: 250px;
+    }
+}
+
+@media (max-width: 450px) {
+    .logoImg {
+        width: 200px;
+    }
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 8%;
+}
+
+@media (max-width: 1050px) {
+    .main {
+        margin-top: 20%;
+    }
+}
+
+@media (max-height: 610px) {
+    .main {
+        margin-top: -2%;
+    }
+}
+
+@media (max-width: 450px) {
+    .main {
+        margin-top: 35%;
+    }
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 3%;
+    height: 22vh;
+}
+
+@media (max-width: 1050px) {
+    form {
+        height: 16vh;
+    }
+}
+
+@media (max-width: 850px) {
+    form {
+        height: 20vh;
+    }
+}
+
+@media (max-height: 610px) {
+    form {
+        height: 12vh;
+    }
+}
+
+label {
+    color: white;
+    font-size: 150%;
+}
+
+@media (max-width: 1050px) {
+    label {
+        font-size: 220%;
+    }
+}
+
+@media (max-height: 610px) {
+    label {
+        font-size: 200%;
+    }
+}
+
+@media (max-width: 450px) {
+    label {
+        font-size: 170%;
+    }
+}
+
+form input {
+    border-radius: 50px;
+    border: none;
+    width: 110%;
+    height: 30px;
+    padding: 5%;
+    font-size: medium;
+    font-family: 'pf_beausans_prolight';
+}
+
+@media (max-width: 1050px) {
+    form input {
+        height: 40px;
+        padding: 5%;
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 850px) {
+    form input {
+        height: 30px;
+        padding: 5%;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 450px) {
+    form input {
+        width: 110%;
+        height: 30px;
+        padding: 5%;
+        font-size: 22px;
+    }
+}
+
+form button {
+    color: black;
+    background-color: #F6C90E;
+    font-size: 150%;
+    border: none;
+    border-radius: 50px;
+    padding: 2%;
+    width: fit-content;
+    padding-left: 6%;
+    padding-right: 6%;
+    margin-top: 20px;
+    font-family: 'pf_beausans_prolight';
+    cursor: pointer;
+}
+
+@media (max-width: 1050px) {
+    form button {
+        font-size: 220%;
+        width: fit-content;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 850px) {
+    form button {
+        font-size: 190%;
+        width: fit-content;
+        margin-top: 35px;
+    }
+}
+
+@media (max-width: 450px) {
+    form button {
+        font-size: 160%;
+        width: fit-content;
+        margin-top: 20px;
+    }
+}
+
+#reg {
+    color: white;
+    margin-top: 3%;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+@media (max-width: 1050px) {
+    #reg {
+        margin-top: 3%;
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 850px) {
+    #reg {
+        margin-top: 3%;
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 450px) {
+    #reg {
+        margin-top: 2%;
+        font-size: 24px;
+    }
+}
+
+#branch {
+    font-size: 20px;
+    font-family:  'pf_beausans_prolight';
+    border-radius: 50px;
+    padding: 3%;
+    border: none;
+    margin-bottom: 4%;
+}
+
+@media (max-width: 1050px) {
+    #branch {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 850px) {
+    #branch {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 450px) {
+    #branch {
+        font-size: 24px;
+    }
+}
+
+#error {
+    font-size: 18px;
+    margin-top: 1%;
+    display: none;
+}
+
+@media (max-width: 1050px) {
+    #error {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 850px) {
+    #error {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 450px) {
+    #error {
+        font-size: 24px;
+    }
+}

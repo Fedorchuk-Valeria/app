@@ -1,0 +1,317 @@
+header {
+    background-color: #06B9BE;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+@media (max-width: 850px) {
+    header {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+}
+
+@media (max-width: 450px) {
+    header {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+}
+
+
+img {
+    width: 90px;
+}
+
+@media (max-width: 1050px) {
+    img {
+        width: 150px;
+    }
+}
+
+@media (max-height: 600px) {
+    img {
+        width: 100px;
+    }
+}
+
+@media (max-width: 850px) {
+    img {
+        width: 130px;
+    }
+}
+
+@media (max-width: 450px) {
+    img {
+        width: 100px;
+    }
+}
+
+hr {
+    width: 30px;
+    border-color: black;
+    background-color: black;
+    transition: 0.4s;
+}
+
+@media (max-width: 1050px) {
+    hr {
+        width: 50px;
+        height: 1px;
+    }
+}
+
+@media (max-height: 600px) {
+    hr {
+        width: 40px;
+        /* height: 1px; */
+    }
+}
+
+@media (max-width: 850px) {
+    hr {
+        width: 50px;
+        height: 1px;
+    }
+}
+
+@media (max-width: 450px) {
+    hr {
+        width: 40px;
+        height: 1px;
+    }
+}
+
+#menu p {
+    margin: 5px;
+    color: white;
+    border-bottom: white 1px solid;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+@media (max-width: 1050px) {
+    #menu p {
+        font-size: 30px;
+    }
+}
+
+@media (max-height: 600px) {
+    #menu p {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 850px) {
+    #menu p {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 550px) {
+    #menu p {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 450px) {
+    #menu p {
+        font-size: 26px;
+    }
+}
+
+#menuButton {
+    display: inline-block;
+}
+
+#main {
+    background-color: white;
+    height: 100vh;
+}
+
+#menu {
+    background-color: #1D576F;
+    width: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    float: right;
+    right: 12px;
+    margin-top: -5px;
+    transition: 0.4s;
+    position: absolute;
+    /* z-index: 1; */
+}
+
+@media (max-width: 1050px) {
+    #menu {
+        width: 20%;
+    }
+}
+
+@media (max-height: 600px) {
+    #menu {
+        width: 15%;
+    }
+}
+
+@media (max-width: 850px) {
+    #menu {
+        width: 22%;
+        right: 15px;
+    }
+}
+
+@media (max-width: 550px) {
+    #menu {
+        width: 30%;
+        right: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    #menu {
+        width: 40%;
+        right: 5px;
+    }
+}
+
+.op {
+    opacity: 0;
+}
+
+#menu::before {
+    content: '\25B2';
+    font-size: 30px;
+    color: #1D576F;
+    display: block; 
+    margin-top: -22px;
+    margin-bottom: -15px;
+    margin-left: 60px;
+    /* opacity: 0; */
+}
+
+@media (max-width: 1050px) {
+    #menu::before {
+        margin-left: 110px;
+    }
+}
+
+@media (max-height: 600px) {
+    #menu::before {
+        margin-left: 80px;
+    }
+}
+
+@media (max-width: 850px) {
+    #menu::before {
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 550px) {
+    #menu::before {
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 450px) {
+    #menu::before {
+        margin-left: 70px;
+    }
+}
+
+.change #line1 {
+  transform: translate(0, 10px) rotate(-45deg);
+}
+
+.change #line2 {opacity: 0;}
+
+.change #line3 {
+  transform: translate(0, -10px) rotate(45deg);
+}
+
+#rightSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80px;
+    justify-content: space-between;
+}
+
+@media (max-width: 1050px) {
+    #rightSection {
+        width: 15%;
+    }
+}
+
+@media (max-height: 600px) {
+    #rightSection {
+        width: 10%;
+    }
+}
+
+@media (max-width: 850px) {
+    #rightSection {
+        width: 18%;
+    }
+}
+
+@media (max-width: 550px) {
+    #rightSection {
+        width: 22%;
+    }
+}
+
+@media (max-width: 450px) {
+    #rightSection {
+        width: 28%;
+    }
+}
+
+#logOut {
+    cursor: pointer;
+    width: 60%;
+}
+
+@media (max-width: 1050px) {
+    #logOut {
+        width: 60%;
+    }
+}
+
+@media (max-height: 600px) {
+    #logOut {
+        width: 60%;
+    }
+}
+
+@media (max-width: 850px) {
+    #logOut {
+        width: 70%;
+    }
+}
+
+@media (max-width: 550px) {
+    #logOut {
+        width: 70%;
+    }
+}
+
+@media (max-width: 450px) {
+    #logOut {
+        width: 70%;
+    }
+}
+
+/* @media (max-height: 600px) {
+    p {
+        font-size: 22px;
+    }
+} */
