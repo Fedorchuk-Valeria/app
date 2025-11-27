@@ -49,10 +49,10 @@ export class GroupsList extends Component {
                 return
             }
             this.setState({
-                groups: res.items
+                groups: res
             })
             let groups_ids = ""
-            res.items.forEach(group => {
+            res.forEach(group => {
                 groups_ids = groups_ids + group.id + ","
             });
             sessionStorage.setItem("tutorGroups", groups_ids)
