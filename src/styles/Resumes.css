@@ -34,7 +34,7 @@
 
 @media (max-width: 450px) {
     #resumesPageHeader p {
-        font-size: 22px;
+        font-size: 18px;
     }
 }
 
@@ -72,12 +72,14 @@
 @media (max-width: 550px) {
     .resumeField {
         width: 80vw;
+        font-size: 22px;
     }
 }
 
 @media (max-width: 450px) {
     .resumeField {
         width: 80vw;
+        font-size: 20px;
     }
 }
 

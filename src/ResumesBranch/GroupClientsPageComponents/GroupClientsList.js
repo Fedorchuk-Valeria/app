@@ -24,7 +24,7 @@ export class GroupClientsList extends Component {
             }
             let new_clients = []
             GetNotApproveResumes(sessionStorage.getItem("token")).then(async (res_resumes) => {
-                if (!res_resumes) {
+                if (res_resumes == null) {
                     this.props.navigate('/')
                     return
                 }
@@ -55,7 +55,8 @@ export class GroupClientsList extends Component {
     {
         sessionStorage.setItem("clientId", e.target.id)
         sessionStorage.setItem("clientName", e.target.innerText)
-        this.props.navigate("/ClientsResumes")
+        // this.props.navigate("/ClientsResumes")
+        window.open("/ClientsResumes", "_blank")
     }
 
 

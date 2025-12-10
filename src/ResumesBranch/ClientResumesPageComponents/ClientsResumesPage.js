@@ -32,7 +32,7 @@ export class ClientsResumesPage extends Component {
                 return
             }
             this.setState({
-                resumes: res.reverse()
+                resumes: res
             })
         })
     }

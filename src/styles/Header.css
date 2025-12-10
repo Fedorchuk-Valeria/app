@@ -184,6 +184,7 @@ hr {
 
 .op {
     opacity: 0;
+    pointer-events: none;
 }
 
 #menu::before {

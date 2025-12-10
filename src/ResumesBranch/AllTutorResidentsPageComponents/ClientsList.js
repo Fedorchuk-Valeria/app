@@ -46,7 +46,8 @@ export class ClientsList extends Component {
     {
         sessionStorage.setItem("clientId", e.target.id)
         sessionStorage.setItem("clientName", e.target.innerText)
-        this.props.navigate("/ClientsResumes")
+        // this.props.navigate("/ClientsResumes")
+        window.open("/ClientsResumes", "_blank")
     }
 
     onFilterButtonClickHandler = (e) => {

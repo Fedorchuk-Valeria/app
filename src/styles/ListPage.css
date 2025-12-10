@@ -23,7 +23,7 @@
 
 @media (max-width: 450px) {
     .forSelect {
-        font-size: 24px;
+        font-size: 20px;
     }
 }
 
@@ -100,7 +100,7 @@
 
 @media (max-width: 450px) {
     #sortField select {
-        font-size: 24px;
+        font-size: 20px;
     }
 }
 

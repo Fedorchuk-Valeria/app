@@ -84,9 +84,9 @@ export async function GetNotApproveResumes(token){
         'Authorization': "Bearer " + token
     }
     return axios.get(url, { headers: headers }).then(response => {
-        return response.data
+        return response.data.results
     }).catch( error => {
-        return false
+        return null
     })
 }
 
@@ -108,14 +108,14 @@ export async function GetClientResumes(client_id, token) {
     }
     return axios.get(url, { headers: headers })
     .then(response => {
-        return response.data
+        return response.data.results
     }).catch( error => {
         return null
     })
 }
 
 export async function EditClientResume(resume_id, newText, token) {
-    const url = `${global.config.host}/resumes/${resume_id}/`
+    const url = `${global.config.host}/resumes/${resume_id}/update/`
     const data = {
         "content": newText
     }
@@ -123,7 +123,7 @@ export async function EditClientResume(resume_id, newText, token) {
         'accept': 'application/json',
         'Authorization': "Bearer " + token
     }
-    return axios.post(url, data, { headers: headers })
+    return axios.put(url, data, { headers: headers })
     .then(response => {
         return response
     }).catch( error => {
@@ -157,7 +157,7 @@ export async function GetReviews(client_id, token) {
     }
     return axios.get(url, { headers: headers })
     .then(response => {
-        return response.data
+        return response.data.results
     }).catch( error => {
         return null
     })
@@ -208,7 +208,6 @@ export async function VerifyResume(resume_id, token) {
     }
     return axios.post(url, {"resime_id": resume_id}, { headers: headers })
     .then(response => {
-        console.log(response.headers)
         return response
     }).catch( error => {
         return null
@@ -216,7 +215,7 @@ export async function VerifyResume(resume_id, token) {
 }
 
 export async function DeleteResume(resume_id, token) {
-    const url = `${global.config.host}/resumes/${resume_id}/`
+    const url = `${global.config.host}/resumes/${resume_id}/delete/`
     const headers = {
         'accept': 'application/json',
         'Authorization': "Bearer " + token
