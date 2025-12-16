@@ -84,7 +84,7 @@ export async function GetNotApproveResumes(token){
         'Authorization': "Bearer " + token
     }
     return axios.get(url, { headers: headers }).then(response => {
-        return response.data.results
+        return response.data
     }).catch( error => {
         return null
     })
@@ -108,7 +108,7 @@ export async function GetClientResumes(client_id, token) {
     }
     return axios.get(url, { headers: headers })
     .then(response => {
-        return response.data
+        return response.data.results
     }).catch( error => {
         return null
     })
