@@ -1,3 +1,7 @@
+// module.exports = global.config = {
+//     host: "http://127.0.0.1:8000/api"
+// };
+
 module.exports = global.config = {
-    host: "http://127.0.0.1:8000/api"
+    host: process.env.REACT_APP_API_HOST || ""
 };
