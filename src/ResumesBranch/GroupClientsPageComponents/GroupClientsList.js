@@ -37,6 +37,10 @@ export class GroupClientsList extends Component {
                 this.setState({
                     clients: new_clients
                 })
+                let clients_ids = new_clients.map(c => c.customer_id)
+                let clients_names = new_clients.map(c => c.client_name)
+                sessionStorage.setItem("clientsIds", clients_ids)
+                sessionStorage.setItem("clientsNames", clients_names)
                 if(document.getElementById("loader")) {
                     document.getElementById("loader").classList.add("hidden");
                 }

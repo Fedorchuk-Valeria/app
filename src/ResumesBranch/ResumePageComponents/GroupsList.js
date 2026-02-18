@@ -39,7 +39,7 @@ export class GroupsList extends Component {
     }
 
     componentDidMount() {
-        if(sessionStorage.getItem("senior") == "true") {
+        if(sessionStorage.getItem("senior") === "true") {
             document.getElementById("forLocSelect").classList.remove("seniorSelect")
             document.getElementById("selectLoc").classList.remove("seniorSelect")
         }
@@ -73,7 +73,7 @@ export class GroupsList extends Component {
                 return
             }
             let new_groups = []
-            if (day == "all") {
+            if (day === "all") {
                 this.setState({
                     groups: res
                 })
@@ -84,7 +84,7 @@ export class GroupsList extends Component {
                     groups: new_groups
                 })
             }
-            if (loc == "all") {
+            if (loc === "all") {
                 document.getElementById("loader").classList.add("hidden")
             } else {
                 this.setState({
@@ -161,7 +161,7 @@ export class GroupsList extends Component {
                         <div id="loader" className="loader"></div>
                         {this.state.groups.map(g => (
                             <tr key={g.id}>
-                                <td>{g.name}</td>
+                                <td>{g.name.substring(0, g.name.indexOf('-'))}</td>
                                 <td><button id={g.id} сlass="openGroup" onClick={this.OpenGroupClickHandler}>Открыть</button></td>
                             </tr>
                         ))}

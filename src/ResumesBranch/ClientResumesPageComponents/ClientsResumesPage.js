@@ -1,8 +1,12 @@
 import React, {Component} from 'react'
 import { HeaderRouterComponent } from '../../headersComponents/HeaderRouter'
+import { ClientResumesNavRouterComponent } from './ClientResumesNavRouter'
 import { Resume } from './Resume'
+import right from "../../images/rightSwap.png"
+import left from "../../images/leftSwap.png"
 import { GetClientResumes, EditClientResume, AddResume, VerifyResume, DeleteResume } from '../../api'
 import "../../styles/Resumes.css"
+import "../../styles/navPanel.css"
 
 
 export class ClientsResumesPage extends Component {
@@ -26,6 +30,16 @@ export class ClientsResumesPage extends Component {
             groupName: sessionStorage.getItem("groupName"),
             clientName: sessionStorage.getItem("clientName"),
         }) 
+        let clients_ids = sessionStorage.getItem("clientsIds").split(',')
+        let clients_names = sessionStorage.getItem("clientsNames").split(',')
+        let curr_id = sessionStorage.getItem("clientId")
+        let index = clients_ids.indexOf(curr_id)
+        if (index == 0) {
+            document.getElementById("leftSwap").style.visibility = "hidden"
+        }
+        if (index == clients_ids.length - 1) {
+            document.getElementById("rightSwap").style.visibility = "hidden"
+        }
         GetClientResumes(sessionStorage.getItem("clientId"), sessionStorage.getItem("token")).then(res => {
             if (!res) {
                 this.props.navigate('/')
@@ -107,10 +121,35 @@ export class ClientsResumesPage extends Component {
         })
     }
 
+    PrevClient = (e) => {
+        let clients_ids = sessionStorage.getItem("clientsIds").split(',')
+        let clients_names = sessionStorage.getItem("clientsNames").split(',')
+        let curr_id = sessionStorage.getItem("clientId")
+        let index = clients_ids.indexOf(curr_id)
+        if (index > 0) {
+            sessionStorage.setItem("clientId", clients_ids[index-1])
+            sessionStorage.setItem("clientName", clients_names[index-1])
+            window.location.reload();
+        }
+    }
+
+    NextClient = (e) => {
+        let clients_ids = sessionStorage.getItem("clientsIds").split(',')
+        let clients_names = sessionStorage.getItem("clientsNames").split(',')
+        let curr_id = sessionStorage.getItem("clientId")
+        let index = clients_ids.indexOf(curr_id)
+        if (index < clients_ids.length - 1) {
+            sessionStorage.setItem("clientId", clients_ids[index+1])
+            sessionStorage.setItem("clientName", clients_names[index+1])
+            window.location.reload();
+        }
+    }
+
     render() {
         return(
             <div id="resumesPage">
-                <HeaderRouterComponent/>
+                <HeaderRouterComponent />
+                <ClientResumesNavRouterComponent group={sessionStorage.getItem("groupName")} client = {sessionStorage.getItem("clientName")}/>
                 <div id="resumeMain">
                     <div className="modalResume" id="editResume">
                         <textarea onChange={this.textAreaChangeHandler} id="resumeText" value={this.state.edittingResumeText}/>
@@ -124,13 +163,17 @@ export class ClientsResumesPage extends Component {
                         <button id="cancelButton" onClick={this.CloseAddResumeWindow}>Отменить</button>
                     </div>
                     <div id="resumesPageHeader">
-                        <p className="withBg">{this.state.clientName}</p>
-                        <button onClick={this.ViewReviewsButtonHandler}>Увидеть отзывы</button>
+                        <div id="swap">
+                            <button id="leftSwap" className="swapButton" onClick={this.PrevClient}><img src={left}/></button>
+                            <p className="withBg">{this.state.clientName}</p>
+                            <button id="rightSwap" className="swapButton" onClick={this.NextClient}><img src={right}/></button>
+                        </div>
+                        <button className="standartButton" onClick={this.ViewReviewsButtonHandler}>Увидеть отзывы</button>
                         <p>{this.state.groupName}</p>
                         {this.state.resumes.map(r => (
                             <Resume key={r.id} resume={r} parent={this}/>
                         ))}
-                        <button onClick={this.AddResumeButtonClick} id="addResumeButton">Добавить резюме</button>
+                        <button className="standartButton" onClick={this.AddResumeButtonClick} id="addResumeButton">Добавить резюме</button>
                     </div>
                 </div>
             </div>

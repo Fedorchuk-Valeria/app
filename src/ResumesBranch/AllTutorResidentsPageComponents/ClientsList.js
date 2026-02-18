@@ -10,7 +10,8 @@ export class ClientsList extends Component {
         super()
         this.state = {
             filter:  false,
-            clients: []
+            clients: [],
+            full_list_clients: []
         }
     }
 
@@ -33,8 +34,13 @@ export class ClientsList extends Component {
                     new_clients.push(res[index])
                 }
                 this.setState({
-                     clients: new_clients
+                     clients: new_clients,
+                     full_list_clients: new_clients
                 })
+                let clients_ids = new_clients.map(c => c.customer_id)
+                let clients_names = new_clients.map(c => c.client_name)
+                sessionStorage.setItem("clientsIds", clients_ids)
+                sessionStorage.setItem("clientsNames", clients_names)
                 if(document.getElementById("loader")) {
                     document.getElementById("loader").classList.add("hidden");
                 }
@@ -51,13 +57,14 @@ export class ClientsList extends Component {
     }
 
     onFilterButtonClickHandler = (e) => {
+        let temp = this.state.full_list_clients
         this.setState({
             clients: []
         })
         document.getElementById("loader").classList.remove("hidden")
         let start_date = document.getElementById("startDate").value
         let end_date = document.getElementById("endDate").value
-        FilderByStartDate(this.state.clients, sessionStorage.getItem("token"), start_date, end_date).then(res => {
+        FilderByStartDate(temp, sessionStorage.getItem("token"), start_date, end_date).then(res => {
             if (!res) {
                 this.props.navigate('/')
                 return
@@ -65,13 +72,24 @@ export class ClientsList extends Component {
             this.setState({
                 clients: res
             })
+            let clients_ids = res.map(c => c.customer_id)
+            let clients_names = res.map(c => c.client_name)
+            sessionStorage.setItem("clientsIds", clients_ids)
+            sessionStorage.setItem("clientsNames", clients_names)
             document.getElementById("loader").classList.add("hidden")
             //window.location.reload();
         })
     }
 
     onResetFilterClickHandler = (e) => {
-        window.location.reload();
+        // window.location.reload();
+        this.setState({
+                clients: this.state.full_list_clients
+        })
+        let clients_ids = this.state.full_list_clients.map(c => c.customer_id)
+        let clients_names = this.state.full_list_clients.map(c => c.client_name)
+        sessionStorage.setItem("clientsIds", clients_ids)
+        sessionStorage.setItem("clientsNames", clients_names)
     }
 
 

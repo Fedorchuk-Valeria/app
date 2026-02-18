@@ -127,6 +127,7 @@ hr {
 
 #menuButton {
     display: inline-block;
+    cursor: pointer;
 }
 
 #main {

@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import { useNavigate } from 'react-router-dom';
 import { RegisterTutor } from '../api';
 
 export class RegistrationFormComponent extends Component {
@@ -19,7 +18,7 @@ export class RegistrationFormComponent extends Component {
     }
 
     ClickButtonHandler = (e) => {
-        //request
+        document.getElementById("regButton").textContent = "Выполняем..."
         const number = document.getElementById("tutorPhone").value.replace("+", "")
         if(number.length != 12) {
             document.getElementById("error").style.display = "block"
@@ -27,9 +26,14 @@ export class RegistrationFormComponent extends Component {
             const branch = document.getElementById("branch").value
             RegisterTutor(number, branch).then(res => {
                 if (res) {
-                    this.props.navigate('/')
-                } else {
+                    document.getElementById("error").textContent = "Регистрация прошла успешно!"
                     document.getElementById("error").style.display = "block"
+                    const nav = this.props.navigate
+                    setTimeout(function(){ nav('/') }, 800);
+                } else {
+                    document.getElementById("error").textContent = "Что-то пошло не так..."
+                    document.getElementById("error").style.display = "block"
+                    document.getElementById("regButton").textContent = "Регистрация"
                 }
             })
         }
@@ -47,7 +51,7 @@ export class RegistrationFormComponent extends Component {
                 </select>
                 <label>Ваш номер телефона:</label>
                 <input type="tel" id="tutorPhone" required value={this.state.numberPhone} onChange={this.ChangePhoneInputHandler}></input>
-                <button type='button' onClick={this.ClickButtonHandler}>Регистрация</button>
+                <button id="regButton" type='button' onClick={this.ClickButtonHandler}>Регистрация</button>
                 <label id="error">Что-то пошло не так...</label>
             </form>
         )

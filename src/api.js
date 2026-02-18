@@ -186,14 +186,16 @@ export async function FilderByStartDate(clients, token, startDateBorder, endDate
         let id = clients[index].customer_id
         let url = `${global.config.host}/clients/detail/?student_crm_id=${id}`
         let res = await axios.get(url, { headers: headers })
-        let clientStartDateArr = res.data.custom_datano.split(".")
-        let clientStartDate = new Date(clientStartDateArr[1] + "." + clientStartDateArr[0] + "." + clientStartDateArr[2])
-        let startDateArr = startDateBorder.split('-') 
-        let startDate = new Date(startDateArr[0] + "." + startDateArr[1] + "." + startDateArr[2])
-        let endDateArr = endDateBorder.split('-') 
-        let endDate = new Date(endDateArr[0] + "." + endDateArr[1] + "." + endDateArr[2])
-        if (startDate <= clientStartDate && clientStartDate <= endDate) {
-            filter_clients.push(clients[index])
+        if(res.data.client_detail == undefined) {
+            let clientStartDateArr = res.data.custom_datano.split(".")
+            let clientStartDate = new Date(clientStartDateArr[1] + "." + clientStartDateArr[0] + "." + clientStartDateArr[2])
+            let startDateArr = startDateBorder.split('-') 
+            let startDate = new Date(startDateArr[0] + "." + startDateArr[1] + "." + startDateArr[2])
+            let endDateArr = endDateBorder.split('-') 
+            let endDate = new Date(endDateArr[0] + "." + endDateArr[1] + "." + endDateArr[2])
+            if (startDate <= clientStartDate && clientStartDate <= endDate) {
+                filter_clients.push(clients[index])
+            }
         }
     }
     return filter_clients

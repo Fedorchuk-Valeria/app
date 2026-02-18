@@ -14,6 +14,7 @@ export class ClientsWithReviewsList extends Component {
     }
 
     componentDidMount() {
+        sessionStorage.removeItem("groupName");
         GetGroups(sessionStorage.getItem("token")).then(res_groups => {
             if (!res_groups) {
                 this.props.navigate('/')
@@ -47,7 +48,7 @@ export class ClientsWithReviewsList extends Component {
                     }
                 }
                 new_clients_with_reviews.sort((el1, el2) => {
-                    return el1.reviewLastDate.getTime() - el2.reviewLastDate.getTime()
+                    return el2.reviewLastDate.getTime() - el1.reviewLastDate.getTime()
                 })
                 this.setState({
                     clients: new_clients_with_reviews.concat(new_clients)
@@ -63,7 +64,8 @@ export class ClientsWithReviewsList extends Component {
     {
         sessionStorage.setItem("clientId", e.target.id)
         sessionStorage.setItem("clientName", e.target.innerText)
-        this.props.navigate("/ClientReviews")
+        // this.props.navigate("/ClientReviews")
+        window.open("/ClientReviews", "_blank")
     }
 
     render() { 

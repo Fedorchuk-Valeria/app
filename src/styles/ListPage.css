@@ -78,6 +78,7 @@
     margin: 10px;
     font-family: 'pf_beausans_prolight';
     text-align: center;
+    cursor: pointer;
 }
 
 @media (max-width: 1050px) {
@@ -140,7 +141,8 @@ tbody button {
     padding: 0.5%;
     padding-left: 4%;
     padding-right: 4%;
-    border: none
+    border: none;
+    cursor: pointer;
 }
 
 @media (max-width: 1050px) {
@@ -187,6 +189,11 @@ tr {
     font-size: 20px;
     padding: 5px;
     box-sizing: border-box;
+    border-bottom: #000 solid 1px;
+}
+
+tr:nth-child(n+2):hover {
+    background-color: #7495a2;
 }
 
 tbody tr:nth-child(1) {
@@ -408,6 +415,7 @@ td, th {
     background-color: transparent;
     font-family: 'pf_beausans_prolight';
     font-size: 16px;
+    cursor: pointer;
     /* margin: 1px; */
 }
 
