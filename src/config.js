@@ -1,7 +1,7 @@
 // module.exports = global.config = {
-//     // host: "http://127.0.0.1:8000/api"
+//     host: "http://127.0.0.1:8000/api"
     
-//     host: "https://kiber-resume.of.by/api"
+//     //host: "https://kiber-resume.of.by/api"
 // };
 
 module.exports = global.config = {

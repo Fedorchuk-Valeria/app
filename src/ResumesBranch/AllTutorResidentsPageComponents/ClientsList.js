@@ -3,6 +3,8 @@ import { GetTutorResidents, GetNotApproveResumes, CheckNotAproveResumes, GetRevi
 import greenMarkImg from "../../images/dont_have_approve_resumes.png"
 import redMarkImg from "../../images/have_approve_resumes.png"
 import cancel from "../../images/Cancel_icon.png"
+import blockMarkImg from "../../images/dont_have_rev.png"
+
 
 
 export class ClientsList extends Component {
@@ -11,12 +13,13 @@ export class ClientsList extends Component {
         this.state = {
             filter:  false,
             clients: [],
-            full_list_clients: []
+            full_list_clients: [],
+            page: 1
         }
     }
 
-    componentDidMount() {
-        GetTutorResidents(sessionStorage.getItem("tutorGroups"), sessionStorage.getItem("token")).then(res => {
+    async getPageClients(groups) {
+        GetTutorResidents(groups, sessionStorage.getItem("token")).then(res => {
             if (!res) {
                 this.props.navigate('/')
                 return
@@ -28,6 +31,9 @@ export class ClientsList extends Component {
                     return
                 }
                 for (let index = 0; index < res.length; index++) {
+                    if(res[index].clients) {
+                        continue
+                    }
                     res[index].status = CheckNotAproveResumes(res_resumes, res[index].customer_id.toString())
                     let reviews = await GetReviews(res[index].customer_id.toString(), sessionStorage.getItem("token"))
                     res[index].reviews_exist = reviews.length > 0
@@ -48,6 +54,16 @@ export class ClientsList extends Component {
         })
     }
 
+    componentDidMount() {
+        sessionStorage.removeItem('groupName')
+        let groups = sessionStorage.getItem("tutorGroups")
+        if(sessionStorage.getItem("senior") === "true") {
+            groups = sessionStorage.getItem("tutorGroups").split(',').slice((this.state.page-1)*10+1, this.state.page*10).toString()
+            document.getElementById("navForSenior").style.display = "flex"
+        }
+        this.getPageClients(groups)
+    }
+
     onClientClickHandler = (e) =>
     {
         sessionStorage.setItem("clientId", e.target.id)
@@ -57,7 +73,12 @@ export class ClientsList extends Component {
     }
 
     onFilterButtonClickHandler = (e) => {
-        let temp = this.state.full_list_clients
+        let temp = []
+        if(sessionStorage.getItem("senior") === "true") {
+            temp = this.state.clients
+        } else {
+            temp = this.state.full_list_clients
+        }
         this.setState({
             clients: []
         })
@@ -92,6 +113,38 @@ export class ClientsList extends Component {
         sessionStorage.setItem("clientsNames", clients_names)
     }
 
+    onNextPageClickHandler = (e) => {
+        this.setState({
+            clients: []
+        })
+        document.getElementById("loader").classList.remove("hidden")
+        let groups = sessionStorage.getItem("tutorGroups")
+        this.setState({
+            page: this.state.page + 1
+        })
+        if(sessionStorage.getItem("senior") === "true") {
+            groups = sessionStorage.getItem("tutorGroups").split(',').slice((this.state.page)*10+1, (this.state.page+1)*10).toString()
+        }
+        this.getPageClients(groups)
+        // document.getElementById("loader").classList.add("hidden")
+    }
+
+    onPrevPageClickHandler = (e) => {
+        this.setState({
+            clients: []
+        })
+        document.getElementById("loader").classList.remove("hidden")
+        let groups = sessionStorage.getItem("tutorGroups")
+        this.setState({
+            page: this.state.page - 1
+        })
+        if(sessionStorage.getItem("senior") === "true") {
+            groups = sessionStorage.getItem("tutorGroups").split(',').slice((this.state.page-2)*10+1, (this.state.page-1)*10).toString()
+        }
+        this.getPageClients(groups)
+        // document.getElementById("loader").classList.add("hidden")
+    }
+
 
     render() { 
         return (
@@ -102,6 +155,11 @@ export class ClientsList extends Component {
                     <input type="date" id="endDate"/>
                     <button onClick={this.onResetFilterClickHandler} id="resetFilterButton"><img src={cancel}/></button>
                     <button onClick={this.onFilterButtonClickHandler} id="filterButton">Фильтровать</button>
+                </div>
+                <div id="navForSenior">
+                    <button onClick={this.onPrevPageClickHandler}>Пред.</button>
+                    {this.state.page}
+                    <button onClick={this.onNextPageClickHandler}>След.</button>
                 </div>
                 <table id="groups">
                     <thead>
@@ -116,7 +174,7 @@ export class ClientsList extends Component {
                         {this.state.clients.map(c => (
                             <tr key={c.customer_id}>
                                 <td id={c.customer_id} onClick={this.onClientClickHandler} className="click leftAlign">{c.client_name}</td>
-                                {c.reviews_exist ? <td className="rightAlignment"><img className="mark" src={redMarkImg}/></td> : <td className="rightAlignment"><img className="mark" src={greenMarkImg}/></td> }
+                                {c.reviews_exist ? <td className="rightAlignment"><img className="mark" src={greenMarkImg}/></td> : <td className="rightAlignment"><img className="mark" src={blockMarkImg}/></td> }
                                 {c.status ? <td className="rightAlignment"><img className="mark" src={redMarkImg}/></td> : <td className="rightAlignment"><img className="mark" src={greenMarkImg}/></td> }
                             </tr>
                         ))}

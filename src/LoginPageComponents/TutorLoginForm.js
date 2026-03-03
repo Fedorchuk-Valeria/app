@@ -20,6 +20,8 @@ export class FormComponent extends Component {
 
     ClickButtonHandler = (e) => {
         e.target.innerText = "Выполянется вход..."
+        sessionStorage.clear();
+        document.getElementById("error").style.display = "none"
         const number = this.state.numberPhone.replace("+", "")
         LoginTutor(number).then(res => {
             if (res) {
@@ -30,6 +32,7 @@ export class FormComponent extends Component {
                 })
             } else {
                 document.getElementById("error").style.display = "block"
+                e.target.innerText = "Вход"
             }
         })
     }

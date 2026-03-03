@@ -9,7 +9,8 @@ export class ClientsWithReviewsList extends Component {
     constructor() {
         super()
         this.state = {
-            clients: []
+            clients: [],
+            page: 1
         }
     }
 
@@ -24,28 +25,40 @@ export class ClientsWithReviewsList extends Component {
             res_groups.forEach(group => {
                 groups_ids = groups_ids + group.id + ","
             });
-            GetTutorResidents(groups_ids, sessionStorage.getItem("token")).then(async (res) => {
-                if (!res) {
-                    this.props.navigate('/')
-                    return
+            if(sessionStorage.getItem("senior") === "true") {
+                groups_ids = groups_ids.split(',').slice((this.state.page-1)*10+1, this.state.page*10).toString()
+                document.getElementById("navForSenior").style.display = "flex"
+            }
+            this.getPageClients(groups_ids)
+        })
+    }
+
+    getPageClients(groups_ids) {
+        GetTutorResidents(groups_ids, sessionStorage.getItem("token")).then(async (res) => {
+            if (!res) {
+                this.props.navigate('/')
+                return
+            }
+            let new_clients = []
+            let new_clients_with_reviews = []
+            for (let index = 0; index < res.length; index++) {
+                if(res[index].clients) {
+                    continue
                 }
-                let new_clients = []
-                let new_clients_with_reviews = []
-                for (let index = 0; index < res.length; index++) {
-                    let reviews = await GetReviews(res[index].customer_id.toString(), sessionStorage.getItem("token"))
-                    let reviewDateStr = "Нет"
-                    let reviewDate
-                    if(reviews.length > 0) {
-                        reviewDate = new Date(reviews.at(-1).created_at.slice(0, 10))
-                        reviewDateStr = reviews.at(-1).created_at.slice(0, 10).split('-')
-                        res[index].reviewLastDateStr = reviewDateStr[2] + '.' + reviewDateStr[1] + '.' + reviewDateStr[0]
-                        res[index].reviewLastDate = reviewDate
-                        new_clients_with_reviews.push(res[index])
-                    } else {
-                        res[index].reviewLastDateStr = reviewDateStr
-                        res[index].reviewLastDate = reviewDate
-                        new_clients.push(res[index])
-                    }
+                let reviews = await GetReviews(res[index].customer_id.toString(), sessionStorage.getItem("token"))
+                let reviewDateStr = "Нет"
+                let reviewDate
+                if(reviews.length > 0) {
+                    reviewDate = new Date(reviews.at(-1).created_at.slice(0, 10))
+                    reviewDateStr = reviews.at(-1).created_at.slice(0, 10).split('-')
+                    res[index].reviewLastDateStr = reviewDateStr[2] + '.' + reviewDateStr[1] + '.' + reviewDateStr[0]
+                    res[index].reviewLastDate = reviewDate
+                    new_clients_with_reviews.push(res[index])
+                } else {
+                    res[index].reviewLastDateStr = reviewDateStr
+                    res[index].reviewLastDate = reviewDate
+                    new_clients.push(res[index])
+                }
                 }
                 new_clients_with_reviews.sort((el1, el2) => {
                     return el2.reviewLastDate.getTime() - el1.reviewLastDate.getTime()
@@ -57,7 +70,6 @@ export class ClientsWithReviewsList extends Component {
                     document.getElementById("loader").classList.add("hidden");
                 }         
             })
-        })
     }
 
     onClientClickHandler = (e) =>
@@ -68,9 +80,64 @@ export class ClientsWithReviewsList extends Component {
         window.open("/ClientReviews", "_blank")
     }
 
+    onNextPageClickHandler = (e) => {
+        this.setState({
+            clients: []
+        })
+        document.getElementById("loader").classList.remove("hidden")
+        this.setState({
+            page: this.state.page + 1
+        })
+        GetGroups(sessionStorage.getItem("token")).then(res_groups => {
+            if (!res_groups) {
+                this.props.navigate('/')
+                return
+            }
+            let groups_ids = ""
+            res_groups.forEach(group => {
+                groups_ids = groups_ids + group.id + ","
+            });
+            if(sessionStorage.getItem("senior") === "true") {
+                groups_ids = groups_ids.split(',').slice((this.state.page-1)*10+1, (this.state.page)*10).toString()
+                document.getElementById("navForSenior").style.display = "flex"
+            }
+            this.getPageClients(groups_ids)
+        })
+    }
+
+    onPrevPageClickHandler = (e) => {
+        this.setState({
+            clients: []
+        })
+        document.getElementById("loader").classList.remove("hidden")
+        this.setState({
+            page: this.state.page - 1
+        })
+        GetGroups(sessionStorage.getItem("token")).then(res_groups => {
+            if (!res_groups) {
+                this.props.navigate('/')
+                return
+            }
+            let groups_ids = ""
+            res_groups.forEach(group => {
+                groups_ids = groups_ids + group.id + ","
+            });
+            if(sessionStorage.getItem("senior") === "true") {
+                groups_ids = groups_ids.split(',').slice((this.state.page-1)*10+1, (this.state.page)*10).toString()
+                document.getElementById("navForSenior").style.display = "flex"
+            }
+            this.getPageClients(groups_ids)
+        })
+    }
+
     render() { 
         return (
             <div>
+                <div id="navForSenior" style={{ "margin-top": "5px" }}>
+                    <button onClick={this.onPrevPageClickHandler}>Пред.</button>
+                    {this.state.page}
+                    <button onClick={this.onNextPageClickHandler}>След.</button>
+                </div>
                 <table id="groups">
                     <thead>
                         <tr id="groupsSectionHeader">

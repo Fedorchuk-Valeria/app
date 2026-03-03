@@ -48,9 +48,18 @@ export class GroupsList extends Component {
                 this.props.navigate('/')
                 return
             }
+            let groups_mon = res.filter((g) => g.name.includes(this.days["mon"]))
+            let groups_tue = res.filter((g) => g.name.includes(this.days["tue"]))
+            let groups_wed = res.filter((g) => g.name.includes(this.days["wed"]))
+            let groups_thur = res.filter((g) => g.name.includes(this.days["thur"]))
+            let groups_sat = res.filter((g) => g.name.includes(this.days["sat"]))
+            let groups_sun = res.filter((g) => g.name.includes(this.days["sun"]))
             this.setState({
-                groups: res
+                groups: groups_mon.concat(groups_tue, groups_wed, groups_thur, groups_sat, groups_sun)
             })
+            // this.setState({
+            //     groups: res
+            // })
             let groups_ids = ""
             res.forEach(group => {
                 groups_ids = groups_ids + group.id + ","
@@ -72,6 +81,14 @@ export class GroupsList extends Component {
                 this.props.navigate('/')
                 return
             }
+            let groups_mon = res.filter((g) => g.name.includes(this.days["mon"]))
+            let groups_tue = res.filter((g) => g.name.includes(this.days["tue"]))
+            let groups_wed = res.filter((g) => g.name.includes(this.days["wed"]))
+            let groups_thur = res.filter((g) => g.name.includes(this.days["thur"]))
+            let groups_sat = res.filter((g) => g.name.includes(this.days["sat"]))
+            let groups_sun = res.filter((g) => g.name.includes(this.days["sun"]))
+            res = groups_mon.concat(groups_tue, groups_wed, groups_thur, groups_sat, groups_sun)
+        
             let new_groups = []
             if (day === "all") {
                 this.setState({
@@ -97,7 +114,8 @@ export class GroupsList extends Component {
 
     OpenGroupClickHandler = (e) => {
         let groupId = e.target.id
-        let groupName = e.target.parentNode.parentNode.childNodes[0].innerText
+        let groupName = e.target.parentNode.parentNode.childNodes[0].innerText + 
+        ' ' + e.target.parentNode.parentNode.childNodes[1].innerText
         sessionStorage.setItem("groupId", groupId)
         sessionStorage.setItem("groupName", groupName)
         sessionStorage.setItem("allResidents", false)
@@ -149,19 +167,23 @@ export class GroupsList extends Component {
                 <table id="groups">
                     <thead>
                         <tr id="groupsSectionHeader">
-                            <th>Группа</th>
+                            <th className='grName grLoc'>Локация</th>
+                            <th className='grName'>Группа</th>
                             <th><img id="childrenImg" src={childrenIcon}/></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td id="residents">Все резиденты</td>
+                            <td className='grName grLoc'></td>
+                            <td className='grName' id="residents">Все резиденты</td>
                             <td><button сlass="openGroup" onClick={this.OpenAllResidentsPage}>Открыть</button></td>
                         </tr>
                         <div id="loader" className="loader"></div>
                         {this.state.groups.map(g => (
                             <tr key={g.id}>
-                                <td>{g.name.substring(0, g.name.indexOf('-'))}</td>
+                                <td className='grName grLoc'>{g.name.substring(0, g.name.indexOf('-')).split(' ')[0]}</td>
+                                <td className='grName'>{g.name.substring(0, g.name.indexOf('-')).split(' ')[1]} {g.name.substring(0, g.name.indexOf('-')).split(' ')[2]}
+                                </td>
                                 <td><button id={g.id} сlass="openGroup" onClick={this.OpenGroupClickHandler}>Открыть</button></td>
                             </tr>
                         ))}

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { GetGroupsClients, GetNotApproveResumes, CheckNotAproveResumes, GetReviews} from '../../api'
 import greenMarkImg from "../../images/dont_have_approve_resumes.png"
 import redMarkImg from "../../images/have_approve_resumes.png"
+import blockMarkImg from "../../images/dont_have_rev.png"
 
 
 export class GroupClientsList extends Component {
@@ -84,7 +85,7 @@ export class GroupClientsList extends Component {
                         {this.state.clients.map(c => (
                             <tr key={c.customer_id}>
                                 <td id={c.customer_id} onClick={this.onClientClickHandler} className="click leftAlign">{c.client_name}</td>
-                                {c.reviews_exist ? <td className="rightAlignment"><img className="mark" src={redMarkImg}/></td> : <td className="rightAlignment"><img className="mark" src={greenMarkImg}/></td> }
+                                {c.reviews_exist ? <td className="rightAlignment"><img className="mark" src={greenMarkImg}/></td> : <td className="rightAlignment"><img className="mark" src={blockMarkImg}/></td> }
                                 {c.status ? <td className="rightAlignment"><img className="mark" src={redMarkImg}/></td> : <td className="rightAlignment"><img className="mark" src={greenMarkImg}/></td> }
                             </tr>
                         ))}

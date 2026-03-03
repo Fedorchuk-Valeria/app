@@ -61,7 +61,7 @@
 }
 
 #listPageMain {
-    background-color: #DADADA;
+    background-color: #e9e9e9;
     height: 100vh;
     box-sizing: border-box;
 }
@@ -174,7 +174,7 @@ table {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #DADADA;
+    background-color: #e9e9e9;
 }
 
 thead, tbody {
@@ -514,4 +514,107 @@ td, th {
 
 .rightAlignment {
     width: 15%
+}
+
+.grName {
+    width: 12%;
+}
+
+@media (max-width: 1050px) {
+    .grName {
+        width: 50%;
+    }
+}
+
+@media (max-width: 850px) {
+    .grName {
+        width: 40%;
+    }
+}
+
+@media (max-width: 550px) {
+    .grName {
+        width: 65%;
+    }
+}
+
+@media (max-width: 450px) {
+    .grName {
+        width: 70%;
+    }
+}
+
+.grLoc {
+    padding-left: 20%;
+}
+
+@media (max-width: 1050px) {
+    .grLoc {
+        padding-left: 5%;
+    }
+}
+
+@media (max-width: 850px) {
+    .grLoc {
+        padding-left: 10%;
+    }
+}
+
+@media (max-width: 550px) {
+    .grLoc {
+        padding-left: 3%;
+    }
+}
+
+@media (max-width: 450px) {
+    .grLoc {
+        padding-left: 0;
+    }
+}
+
+#navForSenior {
+    justify-content: center;
+    align-items: center;
+    /* width: 15%; */
+    margin-left: 1%;
+    margin-bottom: 5px;
+    display: none;
+}
+
+#navForSenior button {
+    background-color: #1D576F;
+    font-size: 14px;
+    color: white;
+    border-radius: 50px;
+    padding: 0.5%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+    border: none;
+    cursor: pointer;
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+@media (max-width: 1050px) {
+    #navForSenior button {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 850px) {
+    #navForSenior button {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 550px) {
+    #navForSenior button {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    #navForSenior button {
+        font-size: 16px;
+    }
 }
