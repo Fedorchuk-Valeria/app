@@ -181,26 +181,33 @@ export async function FilderByStartDate(clients, token, startDateBorder, endDate
         'Content-Type': 'application/json',
         'Authorization': "Bearer " + token
     }
-    let filter_clients = []
-    startDateBorder = startDateBorder ? startDateBorder : "1900-01-01"
-    endDateBorder = endDateBorder ? endDateBorder : "2100-01-01"
+    const filter_clients = [];
+    
+    const startStr = startDateBorder ? startDateBorder : "1900-01-01";
+    const endStr = endDateBorder ? endDateBorder : "2100-01-01";
 
-    console.log(endDateBorder)
+    const startDateArr = startStr.split('-'); 
+    const startDate = new Date(startDateArr[0], startDateArr[1] - 1, startDateArr[2], 0, 0, 0);
+
+    const endDateArr = endStr.split('-'); 
+    const endDate = new Date(endDateArr[0], endDateArr[1] - 1, endDateArr[2], 23, 59, 59);
 
     for (let index = 0; index < clients.length; index++) {
-        let id = clients[index].customer_id
-        let clientStartDateArr = clients[index].study_start_date.split(".")
-        let clientStartDate = new Date(clientStartDateArr[1] + "." + clientStartDateArr[0] + "." + clientStartDateArr[2])
-        let startDateArr = startDateBorder.split('-') 
-        let startDate = new Date(startDateArr[0] + "." + startDateArr[1] + "." + startDateArr[2])
-        let endDateArr = endDateBorder.split('-') 
-        let endDate = new Date(endDateArr[0] + "." + endDateArr[1] + "." + endDateArr[2])
+        const clientStartDateArr = clients[index].study_start_date.split(".");
+        
+        const clientStartDate = new Date(
+            clientStartDateArr[2], 
+            clientStartDateArr[1] - 1, 
+            clientStartDateArr[0]
+        );
         if (startDate <= clientStartDate && clientStartDate <= endDate) {
-            filter_clients.push(clients[index])
+            filter_clients.push(clients[index]);
         }
     }
-    return filter_clients
+    
+    return filter_clients;
 }
+
 
 
 export async function VerifyResume(resume_id, token) {
